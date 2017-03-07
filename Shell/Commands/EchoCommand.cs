@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace Shell
 {
-    class CatCommand: Command
+    class EchoCommand: Command
     {
-        public CatCommand(): base("cat", Command.EndlessArgsCount) { }
+        public EchoCommand(): base("echo", Command.EndlessArgsCount) { }
 
         public override void CreateOutput()
         {
@@ -19,17 +18,12 @@ namespace Shell
 
             foreach (Argument arg in base.args)
             {
-                if (arg.currentType != TypeCode.String)
+                if (arg == null || arg.currentType != TypeCode.String)
                     continue;
-                if (!(new FileInfo(arg.content).Exists))
-                    continue;
-                StreamReader file = new StreamReader(arg.content);
-                base.output += file.ReadToEnd();
-                file.Close();
+                base.output += arg.content;
             }
-
             if (base.output == "")
-                CreateError("Файл не найден");
+                CreateError("Некорректный тип аргументов"); 
             else
                 base.CreateOutput();
         }

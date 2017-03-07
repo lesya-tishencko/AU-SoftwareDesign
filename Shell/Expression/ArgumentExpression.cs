@@ -8,9 +8,7 @@ namespace Shell
 {
     class ArgumentExpression: Expression
     {
-        public ArgumentExpression(IEnumerable<String> content, int count = 2): base(content, count) { }
-
-        public ArgumentExpression(String content) : base(content) { }
+        public ArgumentExpression(IEnumerable<String> content, int count = 2) : base(content, count) { }
 
         public override IEnumerable<CommandLineObject> Interpret()
         {
@@ -22,7 +20,7 @@ namespace Shell
             if (base.contentCount == 2)
             {
                 String key = base.content.First().TrimStart().TrimEnd();
-                String value = base.content.Last().TrimStart(' ', '"').TrimEnd('"', ' ');
+                String value = base.content.Last().TrimStart(' ', '"', '\'').TrimEnd('"', ' ', '\'');
 
                 ArgumentStorer.AddArgument(key, new Argument(value, TypeCode.String));
                 args.Add(new Argument(value, TypeCode.String));
@@ -31,10 +29,10 @@ namespace Shell
 
             foreach (String arg in base.content)
             {
-                var argClean = arg.TrimStart('"', ' ').TrimEnd('"', ' ');
+                var argClean = arg.TrimStart('"', ' ', '\'').TrimEnd('"', ' ', '\'');
                 if (argClean.StartsWith("$"))
                 {
-                    argClean = argClean.TrimStart('$', '"');
+                    argClean = argClean.TrimStart('$', '"', '\'');
                     args.Add(ArgumentStorer.FindArgument(argClean));
                     continue;
                 }

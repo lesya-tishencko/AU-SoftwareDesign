@@ -17,7 +17,7 @@ namespace Shell
             if (base.args.Count() != base.argsCount)
                 CreateError("Неправильно заданное количество аргументов, требуется " + base.argsCount + ", получено " + base.args.Count());
 
-            if (base.args.First().currentType == TypeCode.String)
+            if (base.args.First() == null || base.args.First().currentType == TypeCode.String)
             {
                 String content = null;
                 long bytes = 0;

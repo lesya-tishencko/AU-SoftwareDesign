@@ -43,23 +43,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Argument.cs" />
-    <Compile Include="ArgumentExpression.cs" />
-    <Compile Include="CatCommand.cs" />
-    <Compile Include="Command.cs" />
+    <Compile Include="Commands\Argument.cs" />
+    <Compile Include="Expression\ArgumentExpression.cs" />
+    <Compile Include="Commands\CatCommand.cs" />
+    <Compile Include="Commands\Command.cs" />
     <Compile Include="CommandLineObject.cs" />
-    <Compile Include="CommandStorer.cs" />
-    <Compile Include="EchoCommand.cs" />
-    <Compile Include="ExitCommand.cs" />
-    <Compile Include="Expression.cs" />
-    <Compile Include="LiteralExpression.cs" />
+    <Compile Include="Storer\CommandStorer.cs" />
+    <Compile Include="Commands\EchoCommand.cs" />
+    <Compile Include="Commands\ExitCommand.cs" />
+    <Compile Include="Expression\Expression.cs" />
+    <Compile Include="Expression\LiteralExpression.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PwdCommand.cs" />
-    <Compile Include="ArgumentStorer.cs" />
-    <Compile Include="SequenceExpression.cs" />
+    <Compile Include="Commands\PwdCommand.cs" />
+    <Compile Include="Storer\ArgumentStorer.cs" />
+    <Compile Include="Expression\SequenceExpression.cs" />
     <Compile Include="Shell.cs" />
-    <Compile Include="WcCommand.cs" />
+    <Compile Include="Commands\WcCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

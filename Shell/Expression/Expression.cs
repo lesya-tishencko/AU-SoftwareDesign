@@ -28,9 +28,9 @@ namespace Shell
 
         protected virtual IEnumerable<CommandLineObject> ParseArgumentExpression(string input)
         {
-            if (input.StartsWith("\""))
+            if (input.StartsWith("\"") || input.StartsWith("'"))
             {
-                return new ArgumentExpression(input).Interpret();
+                return new ArgumentExpression(input.Split('\'', '"'), Expression.EndlessContentsCount).Interpret();
             }
             
             return new ArgumentExpression(input.Split(' '), Expression.EndlessContentsCount).Interpret();
