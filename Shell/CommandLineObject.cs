@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shell
 {
+    /// <summary>
+    /// Parent(Wrapper) for Command and Argument
+    /// </summary>
     class CommandLineObject
     {
         public virtual bool isCommand { get; set; }

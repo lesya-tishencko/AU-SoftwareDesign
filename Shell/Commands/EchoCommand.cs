@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace Shell
 {
+    /// <summary>
+    /// Command for printing string
+    /// </summary>
     class EchoCommand: Command
     {
         public EchoCommand(): base("echo", Command.EndlessArgsCount) { }
 
+        /// <summary>
+        /// Opens all setted files, concats it's to one line 
+        /// </summary>
         public override void CreateOutput()
         {
             base.output = "";
@@ -28,6 +34,9 @@ namespace Shell
                 base.CreateOutput();
         }
 
+        /// <summary>
+        /// Executes command of printing files (prints files to console)
+        /// </summary>
         public override void Execute()
         {
             CreateOutput();

@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace Shell
 {
+    /// <summary>
+    /// Command for exiting programm
+    /// </summary>
     class ExitCommand: Command
     {
         public ExitCommand(): base("exit", NoArgsCount) { }
 
+        /// <summary>
+        /// Checks absence of argument
+        /// </summary>
         public override void CreateOutput()
         {
             base.output = "";
@@ -20,6 +26,9 @@ namespace Shell
             }
         }
 
+        /// <summary>
+        /// Executes command of exiting programm
+        /// </summary>
         public override void Execute()
         {
             CreateOutput();

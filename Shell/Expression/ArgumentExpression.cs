@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace Shell
 {
+    /// <summary>
+    /// For parsing of command's argument
+    /// </summary>
     class ArgumentExpression: Expression
     {
         public ArgumentExpression(IEnumerable<String> content, int count = 2) : base(content, count) { }
 
+        /// <summary>
+        /// Parses arguments
+        /// </summary>
         public override IEnumerable<CommandLineObject> Interpret()
         {
             if (base.content.Count() == Expression.NoContents)
@@ -17,10 +23,11 @@ namespace Shell
 
             List<Argument> args = new List<Argument>();
 
+            /* Store named argument */
             if (base.contentCount == 2)
             {
-                String key = base.content.First().TrimStart().TrimEnd();
-                String value = base.content.Last().TrimStart(' ', '"', '\'').TrimEnd('"', ' ', '\'');
+                String key = base.content.First();
+                String value = base.content.Last();
 
                 ArgumentStorer.AddArgument(key, new Argument(value, TypeCode.String));
                 args.Add(new Argument(value, TypeCode.String));
@@ -29,16 +36,15 @@ namespace Shell
 
             foreach (String arg in base.content)
             {
-                var argClean = arg.TrimStart('"', ' ', '\'').TrimEnd('"', ' ', '\'');
-                if (argClean.StartsWith("$"))
+                if (arg.StartsWith("$"))
                 {
-                    argClean = argClean.TrimStart('$', '"', '\'');
+                    var argClean = arg.TrimStart('$', '"', '\'');
                     args.Add(ArgumentStorer.FindArgument(argClean));
                     continue;
                 }
 
-                // we can check type of argument in future, but now we gas all of this like String
-                args.Add(new Argument(argClean, TypeCode.String));
+                // We can check type of argument in future, but now we gas all of this like String
+                args.Add(new Argument(arg, TypeCode.String));
             }
 
             if (args.Count() == 0)

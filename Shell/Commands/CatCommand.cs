@@ -7,13 +7,20 @@ using System.IO;
 
 namespace Shell
 {
+    /// <summary>
+    /// Command for printing file
+    /// </summary>
     class CatCommand: Command
     {
         public CatCommand(): base("cat", Command.EndlessArgsCount) { }
 
+        /// <summary>
+        /// Opens all setted files, concat it's to one line 
+        /// </summary>
         public override void CreateOutput()
         {
             base.output = "";
+            
             if (base.args.Count() == Command.NoArgsCount)
                 CreateError("Аргументы не заданы");
 
@@ -34,6 +41,9 @@ namespace Shell
                 base.CreateOutput();
         }
 
+        /// <summary>
+        /// Executes command of printing files (prints files to console)
+        /// </summary>
         public override void Execute()
         {
             CreateOutput();

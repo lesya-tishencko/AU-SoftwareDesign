@@ -7,10 +7,16 @@ using System.IO;
 
 namespace Shell
 {
+    /// <summary>
+    /// Command for calculating count of lines, words, bytes
+    /// </summary>
     class WcCommand: Command
     {
         public WcCommand(): base("wc", 1) { }
 
+        /// <summary>
+        /// Calculates count of lines, words, bytes in file(or string) and creates string-info
+        /// </summary>
         public override void CreateOutput()
         {
             base.output = "";
@@ -22,13 +28,13 @@ namespace Shell
                 String content = null;
                 long bytes = 0;
 
-                FileInfo fInfo = new FileInfo(base.args.First().content);
-                
-                if (fInfo.Exists)
+                /* We know that it may be not file, but just string.
+                We can't create fileInfo with invalid name */
+                if (!base.args.First().content.Contains('\n') && new FileInfo(base.args.First().content).Exists)
                 {
                     StreamReader file = new StreamReader(base.args.First().content);
                     content = file.ReadToEnd();
-                    bytes = fInfo.Length;
+                    bytes = new FileInfo(base.args.First().content).Length;
                     file.Close();
                 }
                 else
@@ -48,6 +54,9 @@ namespace Shell
                 CreateError("Некорректный тип аргументов");
         }
 
+        /// <summary>
+        /// Prints count of lines, words, bytes to console
+        /// </summary>
         public override void Execute()
         {
             CreateOutput();

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shell
 {
+    /// <summary>
+    /// Represents main command line's entity
+    /// </summary>
     static class Shell
     {
         static public void Start()

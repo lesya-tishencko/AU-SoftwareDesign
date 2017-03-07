@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shell
 {
+    /// <summary>
+    /// Represent entity for command's argument
+    /// </summary>
     class Argument: CommandLineObject
     {
         public String content { get; }

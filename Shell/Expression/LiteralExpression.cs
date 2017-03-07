@@ -6,22 +6,30 @@ using System.Threading.Tasks;
 
 namespace Shell
 {
+    /// <summary>
+    /// For parsing of named command
+    /// </summary>
     class LiteralExpression: Expression
     {
         public LiteralExpression(IEnumerable<String> content, int count): base(content, count) { }
 
+        /// <summary>
+        /// Parses named command with arguments
+        /// </summary>
         public override IEnumerable<CommandLineObject> Interpret()
         {
             if (base.content.Count() != base.contentCount)
                 return null;
 
-            String name = base.content.First();
+            /* Get command (or create if it not found) */
+            String name = base.content.First().TrimStart('$', ' ', '\'', '"');
             Command command = CommandStorer.FindCommand(name);
             if (command == null)
                 command = new Command(name);
 
             if (base.contentCount == 2)
             {
+                /* Get list of arguments */
                 String lastPart = base.content.Last().TrimStart().TrimEnd();
                 var args = ParseArgumentExpression(lastPart);
                 foreach (Argument arg in args)

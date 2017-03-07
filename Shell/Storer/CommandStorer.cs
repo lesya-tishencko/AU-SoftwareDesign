@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shell
 {
+    /// <summary>
+    /// Represents store for named commands
+    /// </summary>
     static class CommandStorer
     {
         private static IDictionary<String, Command> commandsDict = new Dictionary<String, Command>();
