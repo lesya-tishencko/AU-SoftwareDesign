@@ -10,7 +10,7 @@ namespace Shell
     /// <summary>
     /// Represents entity for command execution
     /// </summary>
-    class Command: CommandLineObject
+    public class Command: CommandLineObject
     {
         public static int EndlessArgsCount = -1;
         public static int NoArgsCount = 0;
@@ -45,6 +45,7 @@ namespace Shell
         public virtual void CreateOutput()
         {
             ArgumentStorer.AddArgument(Name, new Argument(output, TypeCode.String));
+            args.Clear();
         }
 
         /// <summary>
@@ -57,6 +58,7 @@ namespace Shell
 
             output += Name + ": " + message;
             ArgumentStorer.AddArgument(Name, new Argument("Error " + output, TypeCode.String));
+            args.Clear();
         }
 
         /// <summary>
@@ -89,6 +91,5 @@ namespace Shell
             }
            
         }
-
     }
 }

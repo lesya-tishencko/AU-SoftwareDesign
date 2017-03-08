@@ -48,6 +48,7 @@
     <Compile Include="Commands\CatCommand.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="CommandLineObject.cs" />
+    <Compile Include="Expression\AssigmentExpression.cs" />
     <Compile Include="Storer\CommandStorer.cs" />
     <Compile Include="Commands\EchoCommand.cs" />
     <Compile Include="Commands\ExitCommand.cs" />

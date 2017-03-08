@@ -9,7 +9,7 @@ namespace Shell
     /// <summary>
     /// Command for exiting programm
     /// </summary>
-    class ExitCommand: Command
+    public class ExitCommand: Command
     {
         public ExitCommand(): base("exit", NoArgsCount) { }
 

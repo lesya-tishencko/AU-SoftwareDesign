@@ -10,7 +10,7 @@ namespace Shell
     /// <summary>
     /// Command for printing file
     /// </summary>
-    class CatCommand: Command
+    public class CatCommand: Command
     {
         public CatCommand(): base("cat", Command.EndlessArgsCount) { }
 
@@ -20,9 +20,12 @@ namespace Shell
         public override void CreateOutput()
         {
             base.output = "";
-            
+
             if (base.args.Count() == Command.NoArgsCount)
+            {
                 CreateError("Аргументы не заданы");
+                return;
+            }
 
             foreach (Argument arg in base.args)
             {
@@ -48,7 +51,6 @@ namespace Shell
         {
             CreateOutput();
             Console.WriteLine(base.output);
-            base.args.Clear();
         }
     }
 }

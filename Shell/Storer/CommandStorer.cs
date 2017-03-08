@@ -26,7 +26,7 @@ namespace Shell
             if (!commandsDict.ContainsKey(key))
                 return null;
 
-            return commandsDict[key];
+            return commandsDict[key]; 
         }
     }
 }

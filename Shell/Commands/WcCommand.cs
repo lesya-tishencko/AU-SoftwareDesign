@@ -10,7 +10,7 @@ namespace Shell
     /// <summary>
     /// Command for calculating count of lines, words, bytes
     /// </summary>
-    class WcCommand: Command
+    public class WcCommand: Command
     {
         public WcCommand(): base("wc", 1) { }
 
@@ -21,9 +21,12 @@ namespace Shell
         {
             base.output = "";
             if (base.args.Count() != base.argsCount)
+            {
                 CreateError("Неправильно заданное количество аргументов, требуется " + base.argsCount + ", получено " + base.args.Count());
+                return;
+            }
 
-            if (base.args.First() == null || base.args.First().Type == TypeCode.String)
+            if (base.args.First() != null || base.args.First().Type == TypeCode.String)
             {
                 String content = null;
                 long bytes = 0;
@@ -61,7 +64,6 @@ namespace Shell
         {
             CreateOutput();
             Console.WriteLine(base.output);
-            base.args.Clear();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Shell
     /// <summary>
     /// Represent entity for command's argument
     /// </summary>
-    class Argument: CommandLineObject
+    public class Argument: CommandLineObject
     {
         public String Content { get; }
         public TypeCode Type { get; }

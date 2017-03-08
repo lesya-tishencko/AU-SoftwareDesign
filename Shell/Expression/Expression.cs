@@ -9,7 +9,7 @@ namespace Shell
     /// <summary>
     /// Represents entity for parsing to command
     /// </summary>
-    class Expression
+    public class Expression
     {
         public static int EndlessContentsCount = -1;
         public static int NoContents = 0;
@@ -36,13 +36,10 @@ namespace Shell
         {
             IEnumerable<String> tokens = null;
             if (input.StartsWith("\"") || input.StartsWith("'"))
-            {
                 tokens = input.Split('\'', '"').Where(str => str != "" && str != " ");
-                return new ArgumentExpression(tokens, Expression.EndlessContentsCount).Interpret();
-            }
-
-            tokens = input.Split(' ').Where(str => str != "" && str != " ");
-            return new ArgumentExpression(tokens, Expression.EndlessContentsCount).Interpret();
+            else
+                tokens = input.Split(' ').Where(str => str != "" && str != " ");
+            return new ArgumentExpression(tokens).Interpret();
         }
 
         /// <summary>
@@ -56,10 +53,10 @@ namespace Shell
             int count = 1;
             if (indexDelim == -1) 
                 /* Parse command without args */
-                tokens = new List<string> { input };
+                tokens = new List<string> { input.TrimStart('\'', '"').TrimEnd('\'', '"') };
             else {
                 /* Parse command with args */
-                tokens = new List<string> { input.Substring(0, indexDelim), input.Substring(indexDelim + 1) };
+                tokens = new List<string> { input.Substring(0, indexDelim).TrimStart('\'', '"').TrimEnd('\'', '"'), input.Substring(indexDelim + 1)};
                 count = 2;
             }
             return new LiteralExpression(tokens, count).Interpret();
@@ -93,17 +90,7 @@ namespace Shell
                 String key = input.Substring(0, indexDelim).TrimStart(' ', '"', '\'').TrimEnd(' ', '"', '\'');
                 String value = input.Substring(indexDelim + 1).TrimStart(' ', '"', '\'').TrimEnd('"', ' ', '\'');
 
-                /* Parse to command */
-                comlinObj = ParseСommandExpression(value);
-
-                /* Parse to argement */
-                if (CommandStorer.FindCommand((comlinObj.First() as Command).Name) == null)
-                {
-                    List<String> tokens = new List<string> { key, value };
-                    comlinObj = new ArgumentExpression(tokens).Interpret();
-                }
-                else
-                    CommandStorer.AddCommand(key, comlinObj.First() as Command);
+                comlinObj = (new AssigmentExpression(new List<String> { key, value })).Interpret();
             }
 
             return comlinObj; 

@@ -9,7 +9,7 @@ namespace Shell
     /// <summary>
     /// Command for printing string
     /// </summary>
-    class EchoCommand: Command
+    public class EchoCommand: Command
     {
         public EchoCommand(): base("echo", Command.EndlessArgsCount) { }
 
@@ -20,7 +20,10 @@ namespace Shell
         {
             base.output = "";
             if (base.args.Count() == Command.NoArgsCount)
+            {
                 CreateError("Аргументы не заданы");
+                return;
+            }
 
             foreach (Argument arg in base.args)
             {
@@ -41,7 +44,6 @@ namespace Shell
         {
             CreateOutput();
             Console.WriteLine(base.output);
-            base.args.Clear();
         }
     }
 }

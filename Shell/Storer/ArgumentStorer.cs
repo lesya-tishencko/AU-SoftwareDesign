@@ -9,7 +9,7 @@ namespace Shell
     /// <summary>
     /// Represents store of enviroment variables
     /// </summary>
-    static class ArgumentStorer
+    public static class ArgumentStorer
     {
         private static IDictionary<String, Argument> argumentsDict = new Dictionary<String, Argument>();
 

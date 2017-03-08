@@ -9,7 +9,7 @@ namespace Shell
     /// <summary>
     /// Parent(Wrapper) for Command and Argument
     /// </summary>
-    class CommandLineObject
+    public class CommandLineObject
     {
         public virtual bool isCommand { get; set; }
         public virtual bool isArgument { get; set; }

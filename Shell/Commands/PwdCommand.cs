@@ -10,7 +10,7 @@ namespace Shell
     /// <summary>
     /// Command for printing current directory
     /// </summary>
-    class PwdCommand: Command
+    public class PwdCommand: Command
     {
         public PwdCommand(): base("pwd", Command.NoArgsCount) { }
 

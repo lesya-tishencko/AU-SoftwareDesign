@@ -9,16 +9,20 @@ namespace Shell
     /// <summary>
     /// Represents main command line's entity
     /// </summary>
-    static class Shell
+    public static class Shell
     {
-        static public void Start()
+        static public void InitDictionary()
         {
             CommandStorer.AddCommand("pwd", new PwdCommand());
             CommandStorer.AddCommand("echo", new EchoCommand());
             CommandStorer.AddCommand("cat", new CatCommand());
             CommandStorer.AddCommand("wc", new WcCommand());
             CommandStorer.AddCommand("exit", new ExitCommand());
+        }
 
+        static public void Start()
+        {
+            InitDictionary();
             while (true)
             {
                 String input = Console.ReadLine();

@@ -11,7 +11,7 @@ namespace Shell
     /// </summary>
     class ArgumentExpression: Expression
     {
-        public ArgumentExpression(IEnumerable<String> content, int count = 2) : base(content, count) { }
+        public ArgumentExpression(IEnumerable<String> content) : base(content, Expression.EndlessContentsCount) { }
 
         /// <summary>
         /// Parses arguments
@@ -22,17 +22,6 @@ namespace Shell
                 return null;
 
             List<Argument> args = new List<Argument>();
-
-            /* Store named argument */
-            if (base.contentCount == 2)
-            {
-                String key = base.content.First();
-                String value = base.content.Last();
-
-                ArgumentStorer.AddArgument(key, new Argument(value, TypeCode.String));
-                args.Add(new Argument(value, TypeCode.String));
-                return args;
-            }
 
             foreach (String arg in base.content)
             {
