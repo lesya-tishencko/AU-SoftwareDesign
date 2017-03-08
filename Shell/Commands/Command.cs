@@ -69,12 +69,12 @@ namespace Shell
             String commandArgs = "";
             foreach (Argument arg in args)
             {
-                if (arg.currentType != TypeCode.String)
+                if (arg.Type != TypeCode.String)
                 {
                     CreateError("Некорректный тип аргументов");
                     return;
                 }
-                commandArgs += arg.content;
+                commandArgs += arg.Content;
             }
             try
             {

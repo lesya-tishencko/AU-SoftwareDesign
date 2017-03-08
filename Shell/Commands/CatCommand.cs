@@ -26,11 +26,11 @@ namespace Shell
 
             foreach (Argument arg in base.args)
             {
-                if (arg == null || arg.currentType != TypeCode.String)
+                if (arg == null || arg.Type != TypeCode.String)
                     continue;
-                if (!(new FileInfo(arg.content).Exists))
+                if (!(new FileInfo(arg.Content).Exists))
                     continue;
-                StreamReader file = new StreamReader(arg.content);
+                StreamReader file = new StreamReader(arg.Content);
                 base.output += file.ReadToEnd();
                 file.Close();
             }

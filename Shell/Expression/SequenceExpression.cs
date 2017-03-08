@@ -46,7 +46,7 @@ namespace Shell
             {
                 (argument.First() as Command).CreateOutput();
                 /* Find output of concrete command in storer */
-                String output = ArgumentStorer.FindArgument((argument.First() as Command).Name).content;
+                String output = ArgumentStorer.FindArgument((argument.First() as Command).Name).Content;
 
                 /* Check execution of command, if we got error, we stop parsing */
                 if (output.StartsWith("Error "))

@@ -24,9 +24,9 @@ namespace Shell
 
             foreach (Argument arg in base.args)
             {
-                if (arg == null || arg.currentType != TypeCode.String)
+                if (arg == null || arg.Type != TypeCode.String)
                     continue;
-                base.output += arg.content;
+                base.output += arg.Content;
             }
             if (base.output == "")
                 CreateError("Некорректный тип аргументов"); 

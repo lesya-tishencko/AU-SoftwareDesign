@@ -23,23 +23,23 @@ namespace Shell
             if (base.args.Count() != base.argsCount)
                 CreateError("Неправильно заданное количество аргументов, требуется " + base.argsCount + ", получено " + base.args.Count());
 
-            if (base.args.First() == null || base.args.First().currentType == TypeCode.String)
+            if (base.args.First() == null || base.args.First().Type == TypeCode.String)
             {
                 String content = null;
                 long bytes = 0;
 
                 /* We know that it may be not file, but just string.
                 We can't create fileInfo with invalid name */
-                if (!base.args.First().content.Contains('\n') && new FileInfo(base.args.First().content).Exists)
+                if (!base.args.First().Content.Contains('\n') && new FileInfo(base.args.First().Content).Exists)
                 {
-                    StreamReader file = new StreamReader(base.args.First().content);
+                    StreamReader file = new StreamReader(base.args.First().Content);
                     content = file.ReadToEnd();
-                    bytes = new FileInfo(base.args.First().content).Length;
+                    bytes = new FileInfo(base.args.First().Content).Length;
                     file.Close();
                 }
                 else
                 {
-                    content = base.args.First().content;
+                    content = base.args.First().Content;
                     bytes = content.Length;
                 }
                 

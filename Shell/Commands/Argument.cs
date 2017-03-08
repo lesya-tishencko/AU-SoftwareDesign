@@ -11,13 +11,13 @@ namespace Shell
     /// </summary>
     class Argument: CommandLineObject
     {
-        public String content { get; }
-        public TypeCode currentType { get; }
+        public String Content { get; }
+        public TypeCode Type { get; }
 
         public Argument(String arg, TypeCode type)
         {
-            content = arg;
-            currentType = type;
+            Content = arg;
+            Type = type;
             base.isArgument = true;
         }
     }
