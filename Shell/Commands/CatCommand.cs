@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace Shell
@@ -30,18 +27,25 @@ namespace Shell
             foreach (Argument arg in base.args)
             {
                 if (arg == null || arg.Type != TypeCode.String)
+                {
                     continue;
+                }
                 if (!(new FileInfo(arg.Content).Exists))
+                {
                     continue;
+                }
                 StreamReader file = new StreamReader(arg.Content);
                 base.output += file.ReadToEnd();
                 file.Close();
             }
 
             if (base.output == "")
+            {
                 CreateError("Файл не найден");
-            else
+            }
+            else {
                 base.CreateOutput();
+            }
         }
 
         /// <summary>

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shell
 {
@@ -18,7 +14,7 @@ namespace Shell
         {
             Content = arg;
             Type = type;
-            base.isArgument = true;
+            base.IsArgument = true;
         }
     }
 }

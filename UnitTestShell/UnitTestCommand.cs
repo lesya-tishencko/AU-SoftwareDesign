@@ -13,37 +13,40 @@ namespace UnitTestShell
         {
             PwdCommand pwd = new PwdCommand();
             pwd.Execute();
-            Assert.AreEqual(ArgumentStorer.FindArgument("pwd").Content, Directory.GetCurrentDirectory());
+            Assert.AreEqual( Directory.GetCurrentDirectory(), ArgumentStorer.Find("pwd").Content);
         }
 
         [TestMethod]
         public void TestMethodCat()
         {
             CatCommand cat = new CatCommand();
-            cat.AddArgument(new Argument("example.txt", TypeCode.String));
-            cat.AddArgument(new Argument("synmaster.txt", TypeCode.String));
+            string file1 = @"../../../example.txt";
+            string file2 = @"../../../synmaster.txt";
+            cat.AddArgument(new Argument(file1, TypeCode.String));
+            cat.AddArgument(new Argument(file2, TypeCode.String));
             cat.Execute();
-            String result = new StreamReader("example.txt").ReadToEnd() + new StreamReader("synmaster.txt").ReadToEnd();
-            Assert.AreEqual(ArgumentStorer.FindArgument("cat").Content, result);
+            String result = new StreamReader(file1).ReadToEnd() + new StreamReader(file2).ReadToEnd();
+            Assert.AreEqual(result, ArgumentStorer.Find("cat").Content);
 
             cat.AddArgument(new Argument("1.txt", TypeCode.String));
             cat.Execute();
-            Assert.IsTrue(ArgumentStorer.FindArgument("cat").Content.StartsWith("Error "));
+            Assert.IsTrue(ArgumentStorer.Find("cat").Content.StartsWith("Error "));
         }
 
         [TestMethod]
         public void TestMethodWc()
         {
             WcCommand wc = new WcCommand();
-            wc.AddArgument(new Argument("example.txt", TypeCode.String));
+            string file = @"../../../example.txt";
+            wc.AddArgument(new Argument(file, TypeCode.String));
             wc.Execute();
-            String text = new StreamReader("example.txt").ReadToEnd();
+            String text = new StreamReader(file).ReadToEnd();
             String result = text.Split('\n').Length.ToString() + " " + text.Split(' ', '\n').Length.ToString() + " " + new FileInfo("example.txt").Length;
-            Assert.AreEqual(ArgumentStorer.FindArgument("wc").Content, result);
+            Assert.AreEqual(result, ArgumentStorer.Find("wc").Content);
 
             wc.AddArgument(new Argument("123", TypeCode.String));
             wc.Execute();
-            Assert.AreEqual(ArgumentStorer.FindArgument("wc").Content, "1 1 3");
+            Assert.AreEqual("1 1 3", ArgumentStorer.Find("wc").Content);
         }
 
         [TestMethod]
@@ -53,10 +56,10 @@ namespace UnitTestShell
             echo.AddArgument(new Argument("Hello, World", TypeCode.String));
             echo.AddArgument(new Argument("!!!", TypeCode.String));
             echo.Execute();
-            Assert.AreEqual(ArgumentStorer.FindArgument("echo").Content, "Hello, World!!!");
+            Assert.AreEqual("Hello, World!!!", ArgumentStorer.Find("echo").Content);
 
             echo.Execute();
-            Assert.IsTrue(ArgumentStorer.FindArgument("echo").Content.StartsWith("Error "));
+            Assert.IsTrue(ArgumentStorer.Find("echo").Content.StartsWith("Error "));
         }
     }
 }

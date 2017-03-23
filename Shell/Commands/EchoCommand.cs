@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shell
 {
@@ -28,13 +25,18 @@ namespace Shell
             foreach (Argument arg in base.args)
             {
                 if (arg == null || arg.Type != TypeCode.String)
+                {
                     continue;
+                }
                 base.output += arg.Content;
             }
             if (base.output == "")
-                CreateError("Некорректный тип аргументов"); 
-            else
+            {
+                CreateError("Некорректный тип аргументов");
+            }
+            else {
                 base.CreateOutput();
+            }
         }
 
         /// <summary>

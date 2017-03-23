@@ -1,32 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shell
 {
     /// <summary>
-    /// Represents store of enviroment variables
+    /// Represents store of enviroment variables and named command
     /// </summary>
     public static class ArgumentStorer
     {
-        private static IDictionary<String, Argument> argumentsDict = new Dictionary<String, Argument>();
+        private static IDictionary<String, Argument> varDict = new Dictionary<String, Argument>();
 
-        public static void AddArgument(String key, Argument value)
+        public static void Add(String key, Argument value)
         {
-            if (argumentsDict.ContainsKey(key))
-                argumentsDict[key] = value;
+            if (varDict.ContainsKey(key))
+                varDict[key] = value;
             else
-                argumentsDict.Add(new KeyValuePair<String, Argument>(key, value));
+                varDict.Add(new KeyValuePair<String, Argument>(key, value));
         }
 
-        public static Argument FindArgument(String key)
-        {
-            if (!argumentsDict.ContainsKey(key))
-                return null;
-
-            return argumentsDict[key];
-        }
+        public static Argument Find(String key) => varDict.ContainsKey(key) ? varDict[key] : null;
     }
 }

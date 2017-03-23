@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
 
 namespace Shell
@@ -15,18 +12,16 @@ namespace Shell
         public static int EndlessArgsCount = -1;
         public static int NoArgsCount = 0;
 
-        protected List<Argument> args;
+        protected List<Argument> args = new List<Argument>();
         protected int argsCount;
-        protected String output;
+        protected String output = "";
         public String Name { get; }
 
         public Command(String name = "", int argsCount = 0)
         {
             Name = name;
             this.argsCount = argsCount;
-            args = new List<Argument>();
-            output = "";
-            base.isCommand = true;
+            base.IsCommand = true;
         }
 
 
@@ -44,7 +39,7 @@ namespace Shell
         /// </summary>
         public virtual void CreateOutput()
         {
-            ArgumentStorer.AddArgument(Name, new Argument(output, TypeCode.String));
+            ArgumentStorer.Add(Name, new Argument(output, TypeCode.String));
             args.Clear();
         }
 
@@ -54,10 +49,12 @@ namespace Shell
         protected virtual void CreateError(String message)
         {
             if (output != "")
+            {
                 output += '\n';
+            }
 
-            output += Name + ": " + message;
-            ArgumentStorer.AddArgument(Name, new Argument("Error " + output, TypeCode.String));
+            output += $"{Name}: {message}";
+            ArgumentStorer.Add(Name, new Argument("Error " + output, TypeCode.String));
             args.Clear();
         }
 

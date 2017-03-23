@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace Shell
@@ -45,16 +42,17 @@ namespace Shell
                     content = base.args.First().Content;
                     bytes = content.Length;
                 }
-                
+
                 long lines = content.Split('\n').Count();
                 long words = content.Split(' ', '\n').Count();
 
                 base.output = lines.ToString() + " " + words.ToString() + " " + bytes.ToString();
 
-               base.CreateOutput();
+                base.CreateOutput();
             }
-            else
+            else {
                 CreateError("Некорректный тип аргументов");
+            }
         }
 
         /// <summary>

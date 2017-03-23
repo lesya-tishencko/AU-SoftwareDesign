@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shell
 {
     /// <summary>
     /// For parsing assigment
     /// </summary>
-    class AssigmentExpression: Expression
+    public class AssigmentExpression: Expression
     {
         public AssigmentExpression(IEnumerable<String> content): base(content, 2) { }
 
@@ -19,7 +17,9 @@ namespace Shell
         public override IEnumerable<CommandLineObject> Interpret()
         {
             if (base.content.Count() != base.contentCount)
+            {
                 return null;
+            }
 
             String key = base.content.First();
             String value = base.content.Last();
@@ -27,10 +27,15 @@ namespace Shell
             /* Try to parse named command */
             IEnumerable<CommandLineObject> commandObj = base.ParseСommandExpression(value);
             /* Try to parse argument */
-            if (CommandStorer.FindCommand((commandObj.First() as Command).Name) == null)
-                ArgumentStorer.AddArgument(key, new Argument(value, TypeCode.String));
-            else
-                CommandStorer.AddCommand(key, commandObj.First() as Command);
+            if (CommandStorer.Find((commandObj.First() as Command).Name) == null)
+            {
+                CommandStorer.Delete(key);
+                ArgumentStorer.Add(key, new Argument(value, TypeCode.String));
+            }
+            else {
+                ArgumentStorer.Add(key, new Argument((commandObj.First() as Command).Name, TypeCode.String));
+                CommandStorer.Add(key, commandObj.First() as Command);
+            }
 
             return commandObj;
         }

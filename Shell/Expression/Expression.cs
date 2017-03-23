@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shell
 {
@@ -35,10 +33,15 @@ namespace Shell
         protected virtual IEnumerable<CommandLineObject> ParseArgumentExpression(string input)
         {
             IEnumerable<String> tokens = null;
-            if (input.StartsWith("\"") || input.StartsWith("'"))
-                tokens = input.Split('\'', '"').Where(str => str != "" && str != " ");
-            else
-                tokens = input.Split(' ').Where(str => str != "" && str != " ");
+            if (input.StartsWith("'"))
+            {
+                input = input.Replace("'", "' ");
+                tokens = input.Split('\'').Where(str => str != "" && str != " " && str != "'");
+            }
+            else {
+                input = input.Replace("$", " $");
+                tokens = input.Split(' ').Where(str => str != "" && str != " " && str != "\"");
+            }
             return new ArgumentExpression(tokens).Interpret();
         }
 
@@ -51,12 +54,14 @@ namespace Shell
             int indexDelim = input.IndexOf(' ');
             List<String> tokens = null;
             int count = 1;
-            if (indexDelim == -1) 
+            if (indexDelim == -1)
+            {
                 /* Parse command without args */
-                tokens = new List<string> { input.TrimStart('\'', '"').TrimEnd('\'', '"') };
+                tokens = new List<string> { input.Trim('"') };
+            }
             else {
                 /* Parse command with args */
-                tokens = new List<string> { input.Substring(0, indexDelim).TrimStart('\'', '"').TrimEnd('\'', '"'), input.Substring(indexDelim + 1)};
+                tokens = new List<string> { input.Substring(0, indexDelim).Trim('"'), input.Substring(indexDelim + 1) };
                 count = 2;
             }
             return new LiteralExpression(tokens, count).Interpret();
@@ -87,8 +92,8 @@ namespace Shell
             IEnumerable<CommandLineObject> comlinObj = null;
             if (indexDelim != -1)
             {
-                String key = input.Substring(0, indexDelim).TrimStart(' ', '"', '\'').TrimEnd(' ', '"', '\'');
-                String value = input.Substring(indexDelim + 1).TrimStart(' ', '"', '\'').TrimEnd('"', ' ', '\'');
+                String key = input.Substring(0, indexDelim).Trim(' ', '"', '\'');
+                String value = input.Substring(indexDelim + 1).Trim(' ', '"', '\'');
 
                 comlinObj = (new AssigmentExpression(new List<String> { key, value })).Interpret();
             }
@@ -102,9 +107,11 @@ namespace Shell
         public virtual IEnumerable<CommandLineObject> Interpret()
         {
             if (content.Count() != contentCount)
+            {
                 return null;
+            }
 
-            String input = content.First().TrimStart().TrimEnd();
+            String input = content.First().Trim();
             /* Try to get pipe's command */
             IEnumerable<CommandLineObject> command = ParseSequenceExpression(input);
             if (command == null)
@@ -112,14 +119,19 @@ namespace Shell
                 /* Try to parse assigment */
                 command = ParseAssigmentExpression(input);
                 if (command != null)
+                {
                     return null;
-                else
+                }
+                else {
                     /* Get command */
                     command = ParseСommandExpression(input);
+                }
             }
 
-            if (command.Count() != 1 || !command.First().isCommand)
+            if (command.Count() != 1 || !command.First().IsCommand)
+            {
                 return null;
+            }
 
             return command;
         }
