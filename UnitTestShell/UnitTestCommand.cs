@@ -13,7 +13,7 @@ namespace UnitTestShell
         {
             PwdCommand pwd = new PwdCommand();
             pwd.Execute();
-            Assert.AreEqual( Directory.GetCurrentDirectory(), ArgumentStorer.Find("pwd").Content);
+            Assert.AreEqual(Directory.GetCurrentDirectory(), ArgumentStorer.Find("pwd").Content);
         }
 
         [TestMethod]
@@ -25,7 +25,7 @@ namespace UnitTestShell
             cat.AddArgument(new Argument(file1, TypeCode.String));
             cat.AddArgument(new Argument(file2, TypeCode.String));
             cat.Execute();
-            String result = new StreamReader(file1).ReadToEnd() + new StreamReader(file2).ReadToEnd();
+            var result = new StreamReader(file1).ReadToEnd() + new StreamReader(file2).ReadToEnd();
             Assert.AreEqual(result, ArgumentStorer.Find("cat").Content);
 
             cat.AddArgument(new Argument("1.txt", TypeCode.String));

@@ -19,7 +19,7 @@ namespace Shell
             base.output = "";
             if (base.args.Count() != base.argsCount)
             {
-                CreateError("Неправильно заданное количество аргументов, требуется " + base.argsCount + ", получено " + base.args.Count());
+                CreateError($"Неправильно заданное количество аргументов, требуется {base.argsCount}, получено {base.args.Count()}");
                 return;
             }
 

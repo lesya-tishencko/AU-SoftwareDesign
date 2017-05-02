@@ -9,8 +9,8 @@ namespace Shell
     /// </summary>
     public class Command: CommandLineObject
     {
-        public static int EndlessArgsCount = -1;
-        public static int NoArgsCount = 0;
+        public const int EndlessArgsCount = -1;
+        public const int NoArgsCount = 0;
 
         protected List<Argument> args = new List<Argument>();
         protected int argsCount;
@@ -28,12 +28,9 @@ namespace Shell
         /// <summary>
         /// Adds argument to command
         /// </summary>
-        public void AddArgument(Argument arg)
-        {
-            args.Add(arg);
-        }
+        public void AddArgument(Argument arg) => args.Add(arg);
 
-     
+
         /// <summary>
         /// Creates output and writes it to storer
         /// </summary>

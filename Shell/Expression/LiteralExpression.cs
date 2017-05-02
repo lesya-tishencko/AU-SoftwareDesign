@@ -22,7 +22,7 @@ namespace Shell
             }
 
             /* Get command (or create if it not found) */
-            String name = base.content.First().TrimStart('$', ' ', '"');
+            var name = base.content.First().TrimStart('$', ' ', '"');
             Command command = CommandStorer.Find(name);
             if (command == null)
             {
@@ -32,7 +32,7 @@ namespace Shell
             if (base.contentCount == 2)
             {
                 /* Get list of arguments */
-                String lastPart = base.content.Last();
+                var lastPart = base.content.Last();
                 var args = ParseArgumentExpression(lastPart);
                 foreach (Argument arg in args)
                     command.AddArgument(arg);

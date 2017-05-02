@@ -30,7 +30,7 @@ namespace Shell
                 return null;
             }
 
-            String firstPart = base.content.First();
+            var firstPart = base.content.First();
             /* Try to get pipe's command */
             IEnumerable<CommandLineObject> argument = ParseSequenceExpression(firstPart);
             /* Try to parse assigment */
@@ -54,7 +54,7 @@ namespace Shell
             {
                 (argument.First() as Command).CreateOutput();
                 /* Find output of concrete command in storer */
-                String output = (ArgumentStorer.Find((argument.First() as Command).Name) as Argument).Content;
+                var output = (ArgumentStorer.Find((argument.First() as Command).Name) as Argument).Content;
 
                 /* Check execution of command, if we got error, we stop parsing */
                 if (output.StartsWith("Error "))

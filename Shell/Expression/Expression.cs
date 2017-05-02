@@ -9,8 +9,8 @@ namespace Shell
     /// </summary>
     public class Expression
     {
-        public static int EndlessContentsCount = -1;
-        public static int NoContents = 0;
+        public const int EndlessContentsCount = -1;
+        public const int NoContents = 0;
 
         protected IEnumerable<String> content;
         protected int contentCount;
@@ -92,8 +92,8 @@ namespace Shell
             IEnumerable<CommandLineObject> comlinObj = null;
             if (indexDelim != -1)
             {
-                String key = input.Substring(0, indexDelim).Trim(' ', '"', '\'');
-                String value = input.Substring(indexDelim + 1).Trim(' ', '"', '\'');
+                var key = input.Substring(0, indexDelim).Trim(' ', '"', '\'');
+                var value = input.Substring(indexDelim + 1).Trim(' ', '"', '\'');
 
                 comlinObj = (new AssigmentExpression(new List<String> { key, value })).Interpret();
             }
@@ -111,7 +111,7 @@ namespace Shell
                 return null;
             }
 
-            String input = content.First().Trim();
+            var input = content.First().Trim();
             /* Try to get pipe's command */
             IEnumerable<CommandLineObject> command = ParseSequenceExpression(input);
             if (command == null)

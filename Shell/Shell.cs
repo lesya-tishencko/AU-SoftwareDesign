@@ -22,7 +22,7 @@ namespace Shell
             InitDictionary();
             while (true)
             {
-                String input = Console.ReadLine();
+                var input = Console.ReadLine();
                 if (input == "")
                 {
                     continue;

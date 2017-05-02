@@ -24,8 +24,8 @@ namespace UnitTestShell
             string file = @"../../../example.txt";
             Command pipes = new Expression("cat " + file + " | wc").Interpret().First() as Command;
             pipes.Execute();
-            String text = new StreamReader(file).ReadToEnd();
-            String result = text.Split('\n').Length.ToString() + " " + text.Split(' ', '\n').Length.ToString() + " " + new FileInfo("example.txt").Length;
+            var text = new StreamReader(file).ReadToEnd();
+            var result = text.Split('\n').Length.ToString() + " " + text.Split(' ', '\n').Length.ToString() + " " + new FileInfo("example.txt").Length;
             Assert.AreEqual(result, ArgumentStorer.Find("wc").Content);
 
             pipes = new Expression("cat " + file + " | wc | echo 'Result of wc '").Interpret().First() as Command;
@@ -48,7 +48,7 @@ namespace UnitTestShell
             var assigment = new Expression("File=\"" + file + "\"").Interpret();
             Command command = new Expression("cat $File").Interpret().First() as Command;
             command.Execute();
-            String result = new StreamReader(file).ReadToEnd();
+            var result = new StreamReader(file).ReadToEnd();
             Assert.AreEqual(result, ArgumentStorer.Find("cat").Content);
 
             command = new Expression("cat \"$File\"").Interpret().First() as Command;

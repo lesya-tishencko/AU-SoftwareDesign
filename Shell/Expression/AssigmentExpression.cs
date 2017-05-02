@@ -21,8 +21,8 @@ namespace Shell
                 return null;
             }
 
-            String key = base.content.First();
-            String value = base.content.Last();
+            var key = base.content.First();
+            var value = base.content.Last();
 
             /* Try to parse named command */
             IEnumerable<CommandLineObject> commandObj = base.ParseСommandExpression(value);
