@@ -1,12 +1,12 @@
-package com.grpc_protobuf;
+package com.sd.grpc.protobuf;
 
-
-import com.com.grpc_protobuf.MessageOuterClass;
-import com.com.grpc_protobuf.MessageServerGrpc;
 import io.grpc.stub.StreamObserver;
 
 import java.util.logging.Logger;
 
+/**
+ * Realised peer-to-peer logic using grpc
+ */
 class MessageServerImpl extends MessageServerGrpc.MessageServerImplBase {
 
     private final IMessageEndpoint messageEndpoint;

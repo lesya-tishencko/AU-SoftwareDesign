@@ -1,22 +1,15 @@
-package com.grpc_protobuf;
+package com.sd.grpc.protobuf;
 
-import com.com.grpc_protobuf.MessageOuterClass;
-import com.com.grpc_protobuf.MessageServerGrpc;
 import io.grpc.*;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.lang.System.exit;
-
-interface IMessageEndpoint {
-    void onMessageReceived(final MessageOuterClass.Message message);
-    void sendMessage(final String messageContent);
-}
-
+/**
+ * Class started and finished server and sended-received messages
+ */
 class MessageEndpoint implements IMessageEndpoint {
     private final Server server;
     private ManagedChannel channel = null;
@@ -35,7 +28,6 @@ class MessageEndpoint implements IMessageEndpoint {
                     final String connectToHost,
                     final String userName)
     {
-        logger.info("Trying to connect to " + connectToHost + ":" + connectToPort);
         server = ServerBuilder.forPort(port)
                 .addService(new MessageServerImpl(this))
                 .build();
@@ -63,6 +55,9 @@ class MessageEndpoint implements IMessageEndpoint {
     }
 
     @Override
+    /**
+     * Send message with setted content
+     */
     public void sendMessage(final String messageContent) {
         logger.info("Trying to sendMessage (" + messageContent + ") to " + connectToHost + ":" + connectToPort);
         final MessageOuterClass.Message message =
@@ -85,14 +80,14 @@ class MessageEndpoint implements IMessageEndpoint {
     }
 
     @Override
+    /**
+     * Printed received messages with meta info
+     */
     public void onMessageReceived(MessageOuterClass.Message message) {
-
         final Date date = new Date(message.getDateTime());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM HH:mm:ss");
         final String formattedDate = dateFormat.format(date);
         System.out.println(message.getName() + "(" + formattedDate + "): " + message.getMessageContent());
-
-
     }
 
     private void stop() {

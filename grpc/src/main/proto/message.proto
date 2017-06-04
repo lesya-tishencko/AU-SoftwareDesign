@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-option java_package = "com.com.grpc_protobuf";
+option java_package = "com.sd.grpc.protobuf";
 
-package com.grpc_protobuf;
+package com.sd.grpc.protobuf;
 
 service MessageServer {
     rpc sendMessage(Message) returns (Answer) {}
