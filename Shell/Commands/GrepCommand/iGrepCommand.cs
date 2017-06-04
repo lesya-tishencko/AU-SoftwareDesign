@@ -5,12 +5,13 @@ namespace Shell
     /// <summary>
     /// Grep command, matched any register
     /// </summary>
-    public class iGrepCommand: GrepWithKeys
+    public class IGrepCommand: GrepWithKeys
     {
-        public iGrepCommand(GrepCommand grep): base(grep) {
+        public IGrepCommand(GrepCommand grep): base(grep) {
             (mainCommand as GrepCommand).AdditionStart = "(?i)";
         }
-        public iGrepCommand(GrepWithKeys grep): base(grep) {
+
+        public IGrepCommand(GrepWithKeys grep): base(grep) {
             (mainCommand as GrepCommand).AdditionStart += "(?i)";
         }
 

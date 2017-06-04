@@ -3,22 +3,25 @@ using System.Collections.Generic;
 
 namespace Shell
 {
+    /// <summary>
+    /// Represents store for commands with keys
+    /// </summary>
     public static class KeyCommandStorer
     {
-        private static IDictionary<Command, ApplicationArguments> varDict 
-            = new Dictionary<Command, ApplicationArguments>();
+        private static IDictionary<Command, IApplicationArguments> varDict 
+            = new Dictionary<Command, IApplicationArguments>();
 
-        public static void Add(Command keyCommand, ApplicationArguments args)
+        public static void Add(Command keyCommand, IApplicationArguments args)
         {
             if (varDict.ContainsKey(keyCommand))
             {
                 varDict[keyCommand] = args;
             }
             else {
-                varDict.Add(new KeyValuePair<Command, ApplicationArguments>(keyCommand, args));
+                varDict.Add(new KeyValuePair<Command, IApplicationArguments>(keyCommand, args));
             }
         }
 
-        public static ApplicationArguments Find(Command key) => varDict.ContainsKey(key) ? varDict[key] : null; 
+        public static IApplicationArguments Find(Command key) => varDict.ContainsKey(key) ? varDict[key] : null; 
     }
 }

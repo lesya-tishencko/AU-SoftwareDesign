@@ -72,14 +72,14 @@ namespace UnitTestShell
             grep.Execute();
             Assert.AreEqual("To much cold outside:((", ArgumentStorer.Find("grep").Content);
 
-            iGrepCommand iGrep = new iGrepCommand(grep);
+            IGrepCommand iGrep = new IGrepCommand(grep);
             grep.AddArgument(new Argument("w", TypeCode.String));
             grep.AddArgument(new Argument(file, TypeCode.String));
             grep.Execute();
             Assert.AreEqual("Awful day\r\nWhy you are so serious?\r", ArgumentStorer.Find("grep").Content);
 
-            iGrep = new iGrepCommand(grep);
-            var wGrep = new wGrepCommand(iGrep);
+            iGrep = new IGrepCommand(grep);
+            var wGrep = new WGrepCommand(iGrep);
             grep.AddArgument(new Argument("che", TypeCode.String));
             grep.AddArgument(new Argument(file, TypeCode.String));
             grep.Execute();

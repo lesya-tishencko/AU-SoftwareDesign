@@ -3,13 +3,14 @@
     /// <summary>
     /// Grep command, matched only at words bound
     /// </summary>
-    public class wGrepCommand: GrepWithKeys
+    public class WGrepCommand: GrepWithKeys
     {
-        public wGrepCommand(GrepCommand grep): base(grep) {
+        public WGrepCommand(GrepCommand grep): base(grep) {
             (mainCommand as GrepCommand).AdditionStart = "\\b";
             (mainCommand as GrepCommand).AdditionEnd = "\\b";
         }
-        public wGrepCommand(GrepWithKeys grep) : base(grep) {
+
+        public WGrepCommand(GrepWithKeys grep) : base(grep) {
             (mainCommand as GrepCommand).AdditionStart += "\\b";
             (mainCommand as GrepCommand).AdditionEnd += "\\b";
         }

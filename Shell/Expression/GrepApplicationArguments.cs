@@ -2,7 +2,7 @@
 
 namespace Shell
 {
-    public class GrepApplicationArguments : ApplicationArguments
+    public class GrepApplicationArguments : IApplicationArguments
     {
         /// <summary>
         /// Class option for cli parser
@@ -24,17 +24,17 @@ namespace Shell
         /// <summary>
         /// Generates grep command with keys
         /// </summary>
-        public override Command generateCommand(Command main)
+        public Command generateCommand(Command main)
         {
             Command result = main;
             if (option.I)
-                result = new iGrepCommand(result as GrepCommand);
+                result = new IGrepCommand(result as GrepCommand);
             if (option.W)
             {
                 var grepCom = result as GrepCommand;
                 result = grepCom == null 
-                    ? new wGrepCommand(result as GrepWithKeys) 
-                    : new wGrepCommand(grepCom);
+                    ? new WGrepCommand(result as GrepWithKeys) 
+                    : new WGrepCommand(grepCom);
             }
                 
             if (option.A > 0)
@@ -53,7 +53,7 @@ namespace Shell
         /// <summary>
         /// Tries to parse string with key and returns unparsed string
         /// </summary>
-        public override string parse(string arg)
+        public string parse(string arg)
         {
             var result = arg;
             var keyArgs = arg.Split();
@@ -61,14 +61,14 @@ namespace Shell
             {
                 if (option.A > 0)
                 {
-                    int s_index = result.IndexOf("-A");
-                    int trim = s_index + 2;
+                    int sIndex = result.IndexOf("-A");
+                    int trim = sIndex + 2;
                     while (result[trim] == ' ')
                         trim++;
-                    int l_index = result.IndexOf(' ', trim);
-                    result = l_index != -1
-                        ? result.Remove(s_index + 2, l_index - s_index)
-                        : result.Remove(s_index + 2);
+                    int lIndex = result.IndexOf(' ', trim);
+                    result = lIndex != -1
+                        ? result.Remove(sIndex + 2, lIndex - sIndex - 1)
+                        : result.Remove(sIndex + 2);
                     result = result.Replace("-A", "");
                 }
                 if (option.I)

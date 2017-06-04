@@ -17,28 +17,16 @@ namespace Shell
             keyParam = key;
         }
 
-        public override void AddArgument(Argument arg)
-        {
-            mainCommand.AddArgument(arg);
-        }
+        public override void AddArgument(Argument arg) => mainCommand.AddArgument(arg);
 
-        public override void CreateOutput()
-        {
-            mainCommand.CreateOutput();
-        }
+        public override void CreateOutput() => mainCommand.CreateOutput();
 
-        public override void Execute()
-        {
-            mainCommand.Execute();
-        }
+        public override void Execute() => mainCommand.Execute();
 
         /// <summary>
         /// Sets key's params
         /// </summary>
-        public virtual void SetKeyParam(String param)
-        {
-            keyParam = param;
-        }
+        public virtual void SetKeyParam(String param) => keyParam = param;
 
         protected Command mainCommand;
         protected String keyParam;

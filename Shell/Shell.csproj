@@ -53,8 +53,8 @@
     <Compile Include="Commands\GrepCommand\AGrepCommand.cs" />
     <Compile Include="Commands\GrepCommand\GrepWithKeys.cs" />
     <Compile Include="Commands\GrepCommand\GrepCommand.cs" />
-    <Compile Include="Commands\GrepCommand\iGrepCommand.cs" />
-    <Compile Include="Commands\GrepCommand\wGrepCommand.cs" />
+    <Compile Include="Commands\GrepCommand\IGrepCommand.cs" />
+    <Compile Include="Commands\GrepCommand\WGrepCommand.cs" />
     <Compile Include="Expression\ArgumentExpression.cs" />
     <Compile Include="Commands\CatCommand.cs" />
     <Compile Include="Commands\Command.cs" />

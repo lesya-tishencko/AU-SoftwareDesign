@@ -6,6 +6,7 @@
     public class AGrepCommand: GrepWithKeys
     {
         public AGrepCommand(GrepCommand grep) : base(grep) { }
+
         public AGrepCommand(GrepWithKeys grep): base(grep) { }
 
         public override void SetKeyParam(string param)
