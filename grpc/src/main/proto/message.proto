@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "com.com.grpc_protobuf";
+
+package com.grpc_protobuf;
+
+service MessageServer {
+    rpc sendMessage(Message) returns (Answer) {}
+}
+
+message Message {
+    string name = 1;
+    int64 dateTime = 2;
+    string messageContent = 3;
+}
+
+message Answer {
+    int32 answerStatus = 1;
+}
