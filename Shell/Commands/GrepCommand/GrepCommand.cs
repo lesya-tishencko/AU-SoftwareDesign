@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace Shell
 {
+    /// <summary>
+    /// Command for matching regex in files or texts
+    /// </summary>
     public class GrepCommand: Command
     {
         public GrepCommand(): base("grep", 2) { }
@@ -26,7 +29,7 @@ namespace Shell
             }
 
             String pattern = base.args.First().Content;
-            pattern += additionStart;
+            pattern = additionStart + pattern;
             pattern += additionEnd;
 
             if (args.Last() == null || args.Last().Type != TypeCode.String)
@@ -45,7 +48,7 @@ namespace Shell
                 file.Close();
             }
             else {
-                content = base.args.First().Content;
+                content = base.args.Last().Content;
             }
 
             List<String> text = content.Split('\n').ToList();
@@ -55,12 +58,14 @@ namespace Shell
             {
                 int startInd = content.LastIndexOf('\n', match.Index) + 1;
                 int endInd = content.IndexOf('\n', match.Index) - 1;
-                if (startInd == -1 && endInd == -1)
+                if (startInd == 0 && endInd == -2)
                 {
                     setOfMatch.Add(content);
                 }
                 else {
-                    int index = text.IndexOf(content.Substring(startInd, endInd - startInd + 1));
+                    int index = endInd != -2
+                        ? text.IndexOf(content.Substring(startInd, endInd - startInd + 1))
+                        : text.IndexOf(content.Substring(startInd));
                     for (int i = 0; i <= countPrintedString; i++)
                         setOfMatch.Add(text[index + i]);
                 }

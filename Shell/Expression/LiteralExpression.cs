@@ -33,12 +33,17 @@ namespace Shell
             {
                 /* Get list of arguments */
                 String lastPart = base.content.Last();
+                var arguments = KeyCommandStorer.Find(command);
+                if (arguments != null)
+                {
+                    lastPart = arguments.parse(lastPart);
+                    command = arguments.generateCommand(command);
+                }
                 var args = ParseArgumentExpression(lastPart);
                 foreach (Argument arg in args)
                     command.AddArgument(arg);
             }
-
-            return new List<Command> { command };
+                return new List<Command> { command };
         }
     }
 }

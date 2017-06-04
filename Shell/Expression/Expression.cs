@@ -36,7 +36,17 @@ namespace Shell
             if (input.StartsWith("'"))
             {
                 input = input.Replace("'", "' ");
-                tokens = input.Split('\'').Where(str => str != "" && str != " " && str != "'");
+                tokens = input.Split('\'').Where(str => str != "" && str != "'");
+                if (tokens.Last() == " ")
+                    tokens = tokens.TakeWhile(str => str != " ");
+                else
+                {
+                    var last = tokens.Last();
+                    tokens = tokens.TakeWhile(str => str != last);
+                    
+                    last = last.Replace("$", " $");
+                    tokens = tokens.Concat(last.Split(' ').Where(str => str != "" && str != " " && str != "\""));
+                }
             }
             else {
                 input = input.Replace("$", " $");

@@ -41,7 +41,7 @@ namespace UnitTestShell
             wc.AddArgument(new Argument(file, TypeCode.String));
             wc.Execute();
             String text = new StreamReader(file).ReadToEnd();
-            String result = text.Split('\n').Length.ToString() + " " + text.Split(' ', '\n').Length.ToString() + " " + new FileInfo("example.txt").Length;
+            String result = text.Split('\n').Length.ToString() + " " + text.Split(' ', '\n').Length.ToString() + " " + new FileInfo(file).Length;
             Assert.AreEqual(result, ArgumentStorer.Find("wc").Content);
 
             wc.AddArgument(new Argument("123", TypeCode.String));
@@ -60,6 +60,30 @@ namespace UnitTestShell
 
             echo.Execute();
             Assert.IsTrue(ArgumentStorer.Find("echo").Content.StartsWith("Error "));
+        }
+
+        [TestMethod]
+        public void TestMethodGrep()
+        {
+            GrepCommand grep = new GrepCommand();
+            string file = @"../../../example.txt";
+            grep.AddArgument(new Argument("\\w:\\(\\($", TypeCode.String));
+            grep.AddArgument(new Argument(file, TypeCode.String));
+            grep.Execute();
+            Assert.AreEqual("To much cold outside:((", ArgumentStorer.Find("grep").Content);
+
+            iGrepCommand iGrep = new iGrepCommand(grep);
+            grep.AddArgument(new Argument("w", TypeCode.String));
+            grep.AddArgument(new Argument(file, TypeCode.String));
+            grep.Execute();
+            Assert.AreEqual("Awful day\r\nWhy you are so serious?\r", ArgumentStorer.Find("grep").Content);
+
+            iGrep = new iGrepCommand(grep);
+            var wGrep = new wGrepCommand(iGrep);
+            grep.AddArgument(new Argument("che", TypeCode.String));
+            grep.AddArgument(new Argument(file, TypeCode.String));
+            grep.Execute();
+            Assert.IsTrue(ArgumentStorer.Find("grep").Content.EndsWith("не удалось"));
         }
     }
 }

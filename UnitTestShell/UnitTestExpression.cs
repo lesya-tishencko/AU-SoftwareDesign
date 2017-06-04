@@ -25,7 +25,7 @@ namespace UnitTestShell
             Command pipes = new Expression("cat " + file + " | wc").Interpret().First() as Command;
             pipes.Execute();
             String text = new StreamReader(file).ReadToEnd();
-            String result = text.Split('\n').Length.ToString() + " " + text.Split(' ', '\n').Length.ToString() + " " + new FileInfo("example.txt").Length;
+            String result = text.Split('\n').Length.ToString() + " " + text.Split(' ', '\n').Length.ToString() + " " + new FileInfo(file).Length;
             Assert.AreEqual(result, ArgumentStorer.Find("wc").Content);
 
             pipes = new Expression("cat " + file + " | wc | echo 'Result of wc '").Interpret().First() as Command;
@@ -103,6 +103,20 @@ namespace UnitTestShell
             command = new Expression("echo \"123$x\"").Interpret().First() as Command;
             command.Execute();
             Assert.AreEqual("1231", ArgumentStorer.Find("echo").Content);
+        }
+
+        [TestMethod]
+        public void TestMethodCLIParser()
+        {
+            string file = @"../../../example.txt";
+            Command command = new Expression("grep -i -w 'check' " + file).Interpret().First() as Command;
+            command.Execute();
+            Assert.AreEqual("-i check\r\nCheck -i\r", ArgumentStorer.Find("grep").Content);
+
+            command = new Expression("cat " + file + " | grep -w 'Why' -A 1").Interpret().First() as Command;
+            command.Execute();
+            Assert.AreEqual("Why you are so serious?\r\nTo much cold outside:((", ArgumentStorer.Find("grep").Content);
+
         }
     }
 }

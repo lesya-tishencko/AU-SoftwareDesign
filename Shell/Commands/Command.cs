@@ -28,7 +28,7 @@ namespace Shell
         /// <summary>
         /// Adds argument to command
         /// </summary>
-        public void AddArgument(Argument arg)
+        public virtual void AddArgument(Argument arg)
         {
             args.Add(arg);
         }

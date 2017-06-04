@@ -15,6 +15,9 @@ namespace Shell
             CommandStorer.Add("cat", new CatCommand());
             CommandStorer.Add("wc", new WcCommand());
             CommandStorer.Add("exit", new ExitCommand());
+            CommandStorer.Add("grep", new GrepCommand());
+
+            KeyCommandStorer.Add(CommandStorer.Find("grep"), new GrepApplicationArguments());
         }
 
         static public void Start()

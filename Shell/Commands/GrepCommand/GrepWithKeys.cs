@@ -1,22 +1,12 @@
 ﻿namespace Shell
 {
-    public class GrepWithKeys: GrepCommand
+    /// <summary>
+    /// Command for grep with keys
+    /// </summary>
+    public class GrepWithKeys: CommandWithKey
     {
-        public GrepWithKeys(GrepCommand grep)
-        {
-            this.grep = grep;
-        }
+        public GrepWithKeys(GrepCommand grep): base(grep) { }
 
-        public override void CreateOutput()
-        {
-            grep.CreateOutput();
-        }
-
-        public override void Execute()
-        {
-            grep.Execute();
-        }
-
-        protected GrepCommand grep;
+        public GrepWithKeys(GrepWithKeys grep) : base(grep.mainCommand) { }
     }
 }

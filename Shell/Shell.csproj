@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,7 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Expression\ApplicationArguments.cs" />
     <Compile Include="Commands\Argument.cs" />
+    <Compile Include="Commands\CommandWithKey.cs" />
     <Compile Include="Commands\GrepCommand\AGrepCommand.cs" />
     <Compile Include="Commands\GrepCommand\GrepWithKeys.cs" />
     <Compile Include="Commands\GrepCommand\GrepCommand.cs" />
@@ -58,6 +64,7 @@
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Expression\Expression.cs" />
     <Compile Include="Expression\LiteralExpression.cs" />
+    <Compile Include="Expression\GrepApplicationArguments.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\PwdCommand.cs" />
@@ -66,9 +73,11 @@
     <Compile Include="Expression\SequenceExpression.cs" />
     <Compile Include="Shell.cs" />
     <Compile Include="Commands\WcCommand.cs" />
+    <Compile Include="Storer\KeyCommandStorer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
