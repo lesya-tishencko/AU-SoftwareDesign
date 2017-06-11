@@ -10,7 +10,7 @@ namespace RogueLike.Core
         /// <returns></returns>
         public static Spirit Create()
         {
-            int health = 20;
+            int health = 15;
             return new Spirit
             {
                 Attack = 4,

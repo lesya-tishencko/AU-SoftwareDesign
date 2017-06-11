@@ -13,6 +13,9 @@ namespace RogueLike.Interfaces
         int X { get; set; }
         int Y { get; set; }
 
+        /// <summary>
+        /// Draw to map console
+        /// </summary>
         void Draw(RLConsole console, IMap map);
     }
 }

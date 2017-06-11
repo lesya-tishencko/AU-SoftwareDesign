@@ -28,6 +28,9 @@ namespace RogueLike.Systems
             map = new Core.GameField();
         }
         
+        /// <summary>
+        /// Create game map
+        /// </summary>
         public Core.GameField CreateMap()
         {
             map.Initialize(width, height);
@@ -122,7 +125,7 @@ namespace RogueLike.Systems
                             // What type generate?
                             var typeEnemy = Dice.Roll("3D8");
                             Core.Enemy enemy;
-                            if (typeEnemy < 15)
+                            if (typeEnemy < 9)
                                 enemy = Core.Spirit.Create();
                             else if (typeEnemy == 20)
                                 enemy = Core.Barabash.Create();

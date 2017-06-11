@@ -5,20 +5,45 @@
     /// </summary>
     public interface IActor
     {
-        // level of damage caused 
+        /// <summary>
+        /// Level of damage caused 
+        /// </summary>
         int Attack { get; set; }
-        // probability miss hit
+        /// <summary>
+        /// Probability miss hit
+        /// </summary>
         int AttackChance { get; set; }
-        // field of view
+        /// <summary>
+        /// Field of view
+        /// </summary>
         int Awareness { get; set; }
-        // level of damage blocked
+        /// <summary>
+        /// Level of damage blocked
+        /// </summary>
         int Defense { get; set; }
-        // probability block hit
+        /// <summary>
+        /// probability block hit
+        /// </summary>
         int DefenseChance { get; set; }
+        /// <summary>
+        /// Count of money
+        /// </summary>
         int Gold { get; set; }
+        /// <summary>
+        /// Health level
+        /// </summary>
         int Health { get; set; }
+        /// <summary>
+        /// Max health level
+        /// </summary>
         int MaxHealth { get; set; }
+        /// <summary>
+        /// Actor's name
+        /// </summary>
         string Name { get; set; }
+        /// <summary>
+        /// Actor's speed
+        /// </summary>
         int Speed { get; set; }
     }
 }

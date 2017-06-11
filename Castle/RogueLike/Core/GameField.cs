@@ -10,10 +10,17 @@ namespace RogueLike.Core
     /// </summary>
     public class GameField : Map
     {
-        public List<Rectangle> Rooms = new List<Rectangle>();
+        public List<Rectangle> Rooms { get; }
         private readonly List<Enemy> enemies = new List<Enemy>();
 
-        // Redraw game field
+        public GameField()
+        {
+            Rooms = new List<Rectangle>();
+        }
+
+        /// <summary>
+        /// Redraw game field
+        /// </summary>
         public void Draw(RLConsole mapConsole, RLConsole statConsole)
         {
             mapConsole.Clear();
@@ -53,7 +60,9 @@ namespace RogueLike.Core
                     console.Set(cell.X, cell.Y, new RLColor(31, 38, 47), new RLColor(72, 77, 85), '#');
         }
 
-        // Update area which player can see
+        /// <summary>
+        /// Update area which player can see
+        /// </summary>
         public void UpdatePlayerFieldOfView()
         {
             Player player = Game.Player;
@@ -67,7 +76,9 @@ namespace RogueLike.Core
             }
         }
 
-        // Correct moving actor
+        /// <summary>
+        /// Correct moving actor
+        /// </summary>
         public bool SetActorPosition(Actor actor, int x, int y)
         {
             Cell cellTo = GetCell(x, y);
@@ -89,6 +100,9 @@ namespace RogueLike.Core
         public Cell GetActorPosition(Actor actor) => GetCell(actor.X, actor.Y);
         public int GetEnemiesCount() => enemies.Count();
 
+        /// <summary>
+        /// Add player to map
+        /// </summary>
         public void AddPlayer(Player player)
         {
             Game.Player = player;
@@ -98,6 +112,9 @@ namespace RogueLike.Core
             Game.TimeSystem.Add(player);
         }
 
+        /// <summary>
+        /// Add enemy to map
+        /// </summary>
         public void AddEnemy(Enemy enemy)
         {
             enemies.Add(enemy);
@@ -106,7 +123,9 @@ namespace RogueLike.Core
             Game.TimeSystem.Add(enemy);
         }
 
-        // Remove enemy when it's dead
+        /// <summary>
+        /// Remove enemy when it's dead
+        /// </summary>
         public void RemoveEnemy(Enemy enemy)
         {
             enemies.Remove(enemy);
@@ -118,9 +137,14 @@ namespace RogueLike.Core
                 Game.MessageLog.Add($"{Game.Player.Name} win!");
         }
 
+        /// <summary>
+        /// Get enemy in set position
+        /// </summary>
         public Enemy GetEnemyAt(int x, int y) => enemies.FirstOrDefault(m => m.X == x && m.Y == y);
 
-        // Generate free position for actor
+        /// <summary>
+        /// Generate free position for actor
+        /// </summary>
         public Point GetPositionForActor(Rectangle room)
         {
             if (HasFreePosition(room))
@@ -135,7 +159,9 @@ namespace RogueLike.Core
             return null;
         }
 
-        // Check availability free area
+        /// <summary>
+        /// Check availability free area
+        /// </summary>
         public bool HasFreePosition(Rectangle room)
         {
             for (int x = 1; x <= room.Width - 2; x++)

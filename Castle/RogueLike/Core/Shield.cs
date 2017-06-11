@@ -1,35 +1,19 @@
-﻿namespace RogueLike.Core
+﻿using System;
+
+namespace RogueLike.Core
 {
     /// <summary>
     /// Represets entity for defence increasing
     /// </summary>
     public class Shield : Interfaces.IInventory, Interfaces.ITimer
     {
-        private int _time; 
+        private int _time;
 
-        public int Cost
-        {
-            get
-            {
-                return 200;
-            }
-        }
+        public int Cost => 180;
 
-        public int MaxTime
-        {
-            get
-            {
-                return 120;
-            }
-        }
+        public char Key => 'S';
 
-        public string Name
-        {
-            get
-            {
-                return "Shield";
-            }
-        }
+        public string Name => "Shield";
 
         public int Time
         {
@@ -47,7 +31,11 @@
         {
             Player current = Game.Player;
             current.Defense += 10;
-            current.Gold -= Cost;
+            if (_time == 0)
+            {
+                current.Gold -= Cost;
+                _time = 120;
+            }
         }
 
         public void TakeOff()

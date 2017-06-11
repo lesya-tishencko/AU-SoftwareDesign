@@ -2,33 +2,18 @@
 
 namespace RogueLike.Core
 {
+    /// <summary>
+    /// Attribute for awareness increasing
+    /// </summary>
     public class EnemyDetector : Interfaces.IInventory, Interfaces.ITimer
     {
-        private int _time; 
+        private int _time;
 
-        public int Cost
-        {
-            get
-            {
-                return 120;
-            }
-        }
+        public int Cost => 80;
 
-        public int MaxTime
-        {
-            get
-            {
-                return 50;
-            }
-        }
+        public char Key => 'D';
 
-        public string Name
-        {
-            get
-            {
-                return "EnemyDetector";
-            }
-        }
+        public string Name => "EnemyDetector";
 
         public int Time
         {
@@ -46,7 +31,11 @@ namespace RogueLike.Core
         {
             Player current = Game.Player;
             current.Awareness += 10;
-            current.Gold -= Cost;
+            if (_time == 0)
+            {
+                current.Gold -= Cost;
+                _time = 50;
+            }
         }
 
         public void TakeOff()

@@ -1,4 +1,6 @@
-﻿namespace RogueLike.Core
+﻿using System;
+
+namespace RogueLike.Core
 {
     /// <summary>
     /// Represents micsture for health reduction
@@ -7,29 +9,11 @@
     {
         private int _time;
 
-        public int Cost
-        {
-            get
-            {
-                return 250;
-            }
-        }
+        public int Cost => 120;
 
-        public int MaxTime
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public char Key => 'M';
 
-        public string Name
-        {
-            get
-            {
-                return "Medicine";
-            }
-        }
+        public string Name => "Medicine";
 
         public int Time
         {
@@ -47,6 +31,7 @@
         {
             Player current = Game.Player;
             current.Health = current.MaxHealth;
+            _time = 1;
             current.Gold -= Cost;
         }
 

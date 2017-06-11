@@ -4,11 +4,13 @@ using System.Linq;
 namespace RogueLike.Systems
 {
     /// <summary>
-    /// Represents acts of alive entyties
+    /// Represents acts of alive entities
     /// </summary>
     public class Behaviour : Interfaces.IActive
     {
-        // Describe figth action by enemy
+        /// <summary>
+        /// Describe fight action by enemy
+        /// </summary>
         public bool Act(Core.Enemy enemy, CommandSystem commandSystem)
         {
             Core.GameField map = Game.Map;
@@ -40,9 +42,7 @@ namespace RogueLike.Systems
 
                 try
                 {
-                    path = pathFinder.ShortestPath(
-                    map.GetCell(enemy.X, enemy.Y),
-                    map.GetCell(player.X, player.Y));
+                    path = pathFinder.ShortestPath(map.GetCell(enemy.X, enemy.Y), map.GetCell(player.X, player.Y));
                 }
                 catch (PathNotFoundException)
                 {

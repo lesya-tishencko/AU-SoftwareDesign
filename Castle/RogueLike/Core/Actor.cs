@@ -9,136 +9,16 @@ namespace RogueLike.Core
     /// </summary>
     public class Actor : Interfaces.IActor, Interfaces.IDrawable, Interfaces.ITimer
     {
-        private int attack;
-        private int attackChance;
-        private int awareness;
-        private int defense;
-        private int defenseChance;
-        private int gold;
-        private int health;
-        private int maxHealth;
-        private string name;
-        private int speed;
-
-        public int Attack
-        {
-            get
-            {
-                return attack;
-            }
-            set
-            {
-                attack = value;
-            }
-        }
-
-        public int AttackChance
-        {
-            get
-            {
-                return attackChance;
-            }
-            set
-            {
-                attackChance = value;
-            }
-        }
-
-        public int Awareness
-        {
-            get
-            {
-                return awareness;
-            }
-            set
-            {
-                awareness = value;
-            }
-        }
-
-        public int Defense
-        {
-            get
-            {
-                return defense;
-            }
-            set
-            {
-                defense = value;
-            }
-        }
-
-        public int DefenseChance
-        {
-            get
-            {
-                return defenseChance;
-            }
-            set
-            {
-                defenseChance = value;
-            }
-        }
-
-        public int Gold
-        {
-            get
-            {
-                return gold;
-            }
-            set
-            {
-                gold = value;
-            }
-        }
-
-        public int Health
-        {
-            get
-            {
-                return health;
-            }
-            set
-            {
-                health = value;
-            }
-        }
-
-        public int MaxHealth
-        {
-            get
-            {
-                return maxHealth;
-            }
-            set
-            {
-                maxHealth = value;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-            }
-        }
-
-        public int Speed
-        {
-            get
-            {
-                return speed;
-            }
-            set
-            {
-                speed = value;
-            }
-        }
+        public int Attack { get; set; }
+        public int AttackChance { get; set; }
+        public int Awareness { get; set; }
+        public int Defense { get; set; }
+        public int DefenseChance { get; set; }
+        public int Gold { get; set; }
+        public int Health { get; set; }
+        public int MaxHealth { get; set; }
+        public string Name { get; set; }
+        public int Speed { get; set; }
 
         public RLColor Color { get; set; }
         public char Symbol { get; set; }
@@ -151,10 +31,7 @@ namespace RogueLike.Core
             {
                 return Speed;
             }
-            set
-            {
-
-            }
+            set { }
         }
 
         public void Draw(RLConsole console, IMap map)

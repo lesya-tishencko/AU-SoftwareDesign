@@ -21,7 +21,9 @@ namespace RogueLike.Core
             items.Add(new Shield(), false);
         }
 
-        // Draw inventory statistics
+        /// <summary>
+        /// Draw inventory statistics
+        /// </summary>
         public void DrawStats(RLConsole inventoryConsole)
         {
             int i = 0;
@@ -29,15 +31,17 @@ namespace RogueLike.Core
             {
                 if (item.Value)
                     // if item was taken
-                    inventoryConsole.Print(1, 2 * i, $"Item: {item.Key.Name}, cost: {item.Key.Cost}", goldColor);
+                    inventoryConsole.Print(1, 2 * i, $"Item: {item.Key.Name}, cost: {item.Key.Cost}, put {item.Key.Key} for take off", goldColor);
                 else
-                    inventoryConsole.Print(1, 2 * i, $"Item: {item.Key.Name}, cost: {item.Key.Cost}", textColor);
+                    inventoryConsole.Print(1, 2 * i, $"Item: {item.Key.Name}, cost: {item.Key.Cost}, put {item.Key.Key} for put on", textColor);
                 i++;
             }
         }
 
-        // Put on attribute
-        public void Add(string item)
+        /// <summary>
+        /// Put on or take off attribute
+        /// </summary>
+        public void Activate(string item)
         {
             foreach (var attr in items.Keys)
             {
@@ -45,15 +49,22 @@ namespace RogueLike.Core
                 {
                     // note like put on
                     items[attr] = true;
-                    // set time of wearing
-                    ((Interfaces.ITimer)attr).Time = attr.MaxTime;
                     attr.PutOn();
+                    return;
+                }
+
+                if (attr.Name == item && items[attr])
+                {
+                    items[attr] = false;
+                    attr.TakeOff();
                     return;
                 }
             }
         }
 
-        // Decrement time of wearing each attribute
+        /// <summary>
+        /// Decrement time of wearing each attribute
+        /// </summary>
         public void Tick()
         {
             foreach (var attr in items.Keys)
@@ -72,11 +83,13 @@ namespace RogueLike.Core
             }
         }
 
-        // Check puting on of attribute
-        public bool Contains(string item) 
+        /// <summary>
+        /// Check puting on of attribute
+        /// </summary>
+        public bool TimeNotFinished(string item) 
         {
             foreach (var attr in items.Keys)
-                if (attr.Name == item) return items[attr];
+                if (attr.Name == item) return ((Interfaces.ITimer)attr).Time > 0;
 
             return false;
         }

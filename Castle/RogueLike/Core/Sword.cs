@@ -9,29 +9,11 @@ namespace RogueLike.Core
     {
         private int _time;
 
-        public int Cost
-        {
-            get
-            {
-                return 300;
-            }
-        }
+        public int Cost => 240;
 
-        public int MaxTime
-        {
-            get
-            {
-                return 200;
-            }
-        }
+        public char Key => 'W';
 
-        public string Name
-        {
-            get
-            {
-                return "Sword";
-            }
-        }
+        public string Name => "Sword";
 
         public int Time
         {
@@ -49,7 +31,11 @@ namespace RogueLike.Core
         {
             Player current = Game.Player;
             current.Attack += 10;
-            current.Gold -= Cost;
+            if (_time == 0)
+            {
+                current.Gold -= Cost;
+                _time = 200;
+            }
         }
 
         public void TakeOff()

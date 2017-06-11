@@ -61,7 +61,9 @@ namespace RogueLike.Systems
             return false;
         }
 
-        // Attack!
+        /// <summary>
+        /// Resolve attack
+        /// </summary>
         public void Attack(Core.Actor attacker, Core.Actor defender)
         {
             string attackMessage = "";
@@ -83,7 +85,9 @@ namespace RogueLike.Systems
             ResolveDamage(defender, damage);
         }
 
-        // Correct calculationg count of hits
+        /// <summary>
+        /// Correct calculationg count of hits
+        /// </summary>
         private static int ResolveAttack(Core.Actor attacker, Core.Actor defender, string attackMessage)
         {
             int hit = 0;
@@ -104,7 +108,9 @@ namespace RogueLike.Systems
             return hit;
         }
 
-        // The defender rolls based on his stats to see if he blocks any of the hits from the attacker
+        /// <summary>
+        /// The defender rolls based on his stats to see if he blocks any of the hits from the attacker
+        /// </summary>
         private static int ResolveDefense(Core.Actor defender, int hit, string attackMessage, string defenseMessage)
         {
             int block = 0;
@@ -134,7 +140,9 @@ namespace RogueLike.Systems
             return block;
         }
 
-        // Change actor's health level
+        /// <summary>
+        /// Change actor's health level
+        /// </summary>
         private static void ResolveDamage(Core.Actor defender, int damage)
         {
             if (damage > 0)
@@ -152,7 +160,9 @@ namespace RogueLike.Systems
             }
         }
 
-        // Remove the defender from the map and add some messages upon death.
+        /// <summary>
+        /// Remove the defender from the map and add some messages upon death
+        /// </summary>
         private static void ResolveDeath(Core.Actor defender)
         {
             if (defender is Core.Player)
@@ -168,13 +178,22 @@ namespace RogueLike.Systems
             }
         }
 
+        /// <summary>
+        /// Check player moving
+        /// </summary>
         public bool IsPlayerTurn { get; set; }
 
+        /// <summary>
+        /// Stop player moving
+        /// </summary>
         public void EndPlayerTurn()
         {
             IsPlayerTurn = false;
         }
         
+        /// <summary>
+        /// Initialize enemies attaks
+        /// </summary>
         public void ActivateEnemies()
         {
             Interfaces.ITimer @object = Game.TimeSystem.Get();
@@ -197,18 +216,22 @@ namespace RogueLike.Systems
             }
         }
 
-        // Try to put on attribute
+        /// <summary>
+        /// Try to put on attribute
+        /// </summary>
         public bool PutOnAttr(Interfaces.IInventory item)
         {
-            if (Game.Player.Gold >= item.Cost && !Game.Inventory.Contains(item.Name))
+            if (Game.Player.Gold >= item.Cost || Game.Inventory.TimeNotFinished(item.Name))
             {
-                Game.Inventory.Add(item.Name);
+                Game.Inventory.Activate(item.Name);
                 return true;
             }
             return false;
         }
 
-        // Enemies moving
+        /// <summary>
+        /// Move enemy in game map
+        /// </summary>
         public void MoveEnemy(Core.Enemy enemy, Cell cell)
         {
             if (!Game.Map.SetActorPosition(enemy, cell.X, cell.Y))

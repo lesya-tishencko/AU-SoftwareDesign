@@ -9,9 +9,10 @@
         void TakeOff();
 
         string Name { get; }
-        // how many gold you need buy this attribute
+        /// <summary>
+        /// How many gold you need buy this attribute
+        /// </summary>
         int Cost { get; }
-        // time of wearing
-        int MaxTime { get; } 
+        char Key { get; }
     }
 }

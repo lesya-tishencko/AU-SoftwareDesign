@@ -23,7 +23,9 @@ namespace RogueLike.Systems
         // for test
         public int Count() => lines.Count;
 
-        // Add a line to the MessageLog queue
+        /// <summary>
+        /// Add a line to the MessageLog queue
+        /// </summary>
         public void Add(string message)
         {
             lines.Enqueue(message);
@@ -35,17 +37,25 @@ namespace RogueLike.Systems
             }
         }
 
+        /// <summary>
+        /// Check player death
+        /// </summary>
         public bool IsDied()
         {
             return lines.Contains("GAME OVER!");
         }
 
+        /// <summary>
+        /// Check player win
+        /// </summary>
         public bool IsWin()
         {
             return lines.Contains($"{Game.Player.Name} win!");
         }
 
-        // Draw each line of the MessageLog queue to the console
+        /// <summary>
+        /// Draw each line of the MessageLog queue to the console
+        /// </summary>
         public void Draw(RLConsole console)
         {
             console.Clear();

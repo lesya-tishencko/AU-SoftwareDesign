@@ -17,7 +17,9 @@ namespace RogueLike.Systems
             objects = new SortedDictionary<int, List<Interfaces.ITimer>>();
         }
 
-        // Starts to follow for active objects
+        /// <summary>
+        /// Starts to follow for active objects
+        /// </summary>
         public void Add(Interfaces.ITimer @object)
         {
             int key = time + @object.Time;
@@ -27,7 +29,10 @@ namespace RogueLike.Systems
             }
             objects[key].Add(@object);
         }
-        
+
+        /// <summary>
+        /// Finish to follow for active objects
+        /// </summary>
         public void Remove(Interfaces.ITimer @object)
         {
             KeyValuePair<int, List<Interfaces.ITimer>> objListFound
@@ -51,6 +56,9 @@ namespace RogueLike.Systems
             }
         }
         
+        /// <summary>
+        /// Get next following object 
+        /// </summary>
         public Interfaces.ITimer Get()
         {
             var firstGroup = objects.First();
@@ -60,13 +68,17 @@ namespace RogueLike.Systems
             return first;
         }
 
-        // Get the current time
+        /// <summary>
+        /// Get the current time
+        /// </summary>
         public int GetTime()
         {
             return time;
         }
 
-        // Reset the time and clear out the objects
+        /// <summary>
+        /// Reset the time and clear out the objects
+        /// </summary>
         public void Clear()
         {
             time = 0;

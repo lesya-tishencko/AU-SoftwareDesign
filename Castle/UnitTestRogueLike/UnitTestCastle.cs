@@ -38,11 +38,11 @@ namespace UnitTestRogueLike
         {
             RogueLike.Game.Initialize();
 
-            RogueLike.Game.Player.Gold = 120 + 200;
-            RogueLike.Game.Inventory.Add("EnemyDetector");
+            RogueLike.Game.Player.Gold = 80 + 180;
+            RogueLike.Game.Inventory.Activate("EnemyDetector");
             Assert.AreEqual(25, RogueLike.Game.Player.Awareness);
 
-            RogueLike.Game.Inventory.Add("Shield");
+            RogueLike.Game.Inventory.Activate("Shield");
             Assert.AreEqual(12, RogueLike.Game.Player.Defense);
 
             Assert.AreEqual(0, RogueLike.Game.Player.Gold);
